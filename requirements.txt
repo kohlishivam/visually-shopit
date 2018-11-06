@@ -11,3 +11,5 @@ google-cloud-vision==0.34.0
 googleapis-common-protos==1.5.5
 requests==2.20.0
 selenium==3.141.0
+grpcio==1.16.0
+
