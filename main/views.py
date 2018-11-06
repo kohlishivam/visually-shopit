@@ -71,12 +71,14 @@ def setup_webdriver():
 def scrapper(keywords):
     driver=setup_webdriver()
     url = "https://www.myntra.com/" + keywords
+    print(url)
     driver.get(url)
     data = driver.page_source
     soup = BS(data,"html.parser")
     # divdata = soup.find_all('ul', {"class": "results-base"})
     arr = []
     divdata = soup.find_all('img')
+    print(divdata)
     # for i in range(9):
     #     item = {}
     #     for img in divdata[0].find_all("img"):
