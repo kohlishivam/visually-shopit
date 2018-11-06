@@ -51,13 +51,13 @@ def test(request):
 # to initialte the driver
 # chrome driver is used for this selenium
 def setup_webdriver():
-    # chrome_options = webdriver.ChromeOptions()
+    chrome_options = webdriver.ChromeOptions()
     # prefs = {"profile.default_content_setting_values.notifications" : 2}
     # chrome_options.add_experimental_option("prefs",prefs)
     # path = os.path.dirname(os.path.abspath('chromedriver'))
     # driver = webdriver.Chrome(executable_path="/main/chromedriver", chrome_options=chrome_options)
     # return driver
-    chrome_options = Options()
+    # chrome_options = Options()
     chrome_options.binary_location = GOOGLE_CHROME_BIN
     chrome_options.add_argument('--disable-gpu')
     chrome_options.add_argument('--no-sandbox')
