@@ -40,7 +40,7 @@ def get_prediction(content, project_id, model_id):
     prediction_client = automl_v1beta1.PredictionServiceClient(credentials=credentials)
     name = 'projects/{}/locations/us-central1/models/{}'.format(project_id, model_id)
     payload = {'image': {'image_bytes': content }}
-    params = {"score_threshold": 0.2}
+    params = {"score_threshold": '0.2'}
     request = prediction_client.predict(name, payload, params)
     return request
 
