@@ -38,7 +38,7 @@ def handleUpload(request):
             if i == 3:
                 break
             else:
-                if i = 0:
+                if i == 0:
                      keywords = str(key)
                 else:
                     keywords = str(key)+"-"+keywords
