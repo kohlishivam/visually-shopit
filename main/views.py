@@ -10,7 +10,6 @@ from selenium import webdriver
 import time
 import requests
 from bs4 import BeautifulSoup as BS
-from objdict import ObjDict
 
 
 ## handle the image uploads
