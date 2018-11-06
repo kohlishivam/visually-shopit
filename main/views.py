@@ -11,6 +11,8 @@ import time
 import requests
 from bs4 import BeautifulSoup as BS
 import os
+import operator
+import json
 
 
 ## handle the image uploads
@@ -23,15 +25,25 @@ def handleUpload(request):
         model_id = "ICN747416880257459356"
         response = get_prediction(image_read, project_id,  model_id)
         print(response)
-        keywords_arr = []
+        context_dict = {}
         for result in response.payload:
-            keywords_arr.append(result.display_name)
-        print(keywords_arr)
+            if result.display_name=='Shoes':
+                pass
+            else:
+                context_dict[result.display_name] = result.classification.score
+        context_dict = sorted(context_dict.items(), key=operator.itemgetter(1), reverse=True)
         keywords = ""
-        for i in keywords_arr:
-            keywords = i+"-"+keywords
+        i = 0
+        for key, value in context_dict:
+            if i == 3:
+                break
+            else:
+                keywords = str(key)+"-"+keywords
+                i = i+1
         keywords = str(keywords)
-        return HttpResponse(scrapper(keywords))
+        print(keywords)
+        response_data = scrapper(keywords)
+        return HttpResponse(json.dumps(response_data), content_type="application/json")
  
 
 # direct google function to get the prediction
@@ -63,6 +75,10 @@ def setup_webdriver():
     chrome_options.add_argument("disable-infobars");
     chrome_options.add_argument("--disable-extensions"); 
     driver = webdriver.Chrome(executable_path='/app/.chromedriver/bin/chromedriver', chrome_options=chrome_options)
+    # chrome_options = webdriver.ChromeOptions()
+    # prefs = {"profile.default_content_setting_values.notifications" : 2}
+    # chrome_options.add_experimental_option("prefs",prefs)
+    # driver = webdriver.Chrome(executable_path='/Users/sk/Desktop/shopit/chromedriver', chrome_options=chrome_options)
     return driver
 
 
@@ -88,4 +104,4 @@ def scrapper(keywords):
             item['href'] = "https://www.myntra.com/" + href["href"]
         arr.append(item)
     driver.close()
-    return divdata
+    return arr
