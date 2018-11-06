@@ -99,12 +99,10 @@ def scrapper(keywords):
     divdata = soup.find_all('ul', {"class": "results-base"})
     # print(divdata)
     arr = []
-    for i in range(9):
+    for (img,href) in zip(divdata[0].find_all("img"),divdata[0].find_all("a")):
         item = {}
-        for img in divdata[0].find_all("img"):
-            item['img'] = img["src"]
-        for href in divdata[0].find_all("a"):
-            item['href'] = "https://www.myntra.com/" + href["href"]
+        item['img'] = img["src"]
+        item['href'] = "https://www.myntra.com/" + href["href"]
         arr.append(item)
     driver.close()
     return arr
