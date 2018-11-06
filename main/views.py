@@ -88,4 +88,4 @@ def scrapper(keywords):
             item['href'] = "https://www.myntra.com/" + href["href"]
         arr.append(item)
     driver.close()
-    return divdata
+    return arr
