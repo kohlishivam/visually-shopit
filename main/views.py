@@ -11,8 +11,6 @@ import time
 import requests
 from bs4 import BeautifulSoup as BS
 import os
-import operator
-import json
 
 
 ## handle the image uploads
@@ -25,28 +23,15 @@ def handleUpload(request):
         model_id = "ICN747416880257459356"
         response = get_prediction(image_read, project_id,  model_id)
         print(response)
-        context_dict = {}
+        keywords_arr = []
         for result in response.payload:
-            if result.display_name=='Shoes':
-                pass
-            else:
-                context_dict[result.display_name] = result.classification.score
-        context_dict = sorted(context_dict.items(), key=operator.itemgetter(1), reverse=True)
+            keywords_arr.append(result.display_name)
+        print(keywords_arr)
         keywords = ""
-        i = 0
-        for key, value in context_dict:
-            if i == 3:
-                break
-            else:
-                if i == 0:
-                     keywords = str(key)
-                else:
-                    keywords = str(key)+"-"+keywords
-                i = i+1
+        for i in keywords_arr:
+            keywords = i+"-"+keywords
         keywords = str(keywords)
-        print(keywords)
-        response_data = scrapper(keywords)
-        return HttpResponse(json.dumps(response_data), content_type="application/json")
+        return HttpResponse(scrapper(keywords))
  
 
 # direct google function to get the prediction
@@ -55,7 +40,7 @@ def get_prediction(content, project_id, model_id):
     prediction_client = automl_v1beta1.PredictionServiceClient(credentials=credentials)
     name = 'projects/{}/locations/us-central1/models/{}'.format(project_id, model_id)
     payload = {'image': {'image_bytes': content }}
-    params = {"score_threshold": '0.2'}
+    params = {"score_threshold": 0.2}
     request = prediction_client.predict(name, payload, params)
     return request
 
@@ -78,10 +63,6 @@ def setup_webdriver():
     chrome_options.add_argument("disable-infobars");
     chrome_options.add_argument("--disable-extensions"); 
     driver = webdriver.Chrome(executable_path='/app/.chromedriver/bin/chromedriver', chrome_options=chrome_options)
-    # chrome_options = webdriver.ChromeOptions()
-    # prefs = {"profile.default_content_setting_values.notifications" : 2}
-    # chrome_options.add_experimental_option("prefs",prefs)
-    # driver = webdriver.Chrome(executable_path='/Users/sk/Desktop/shopit/chromedriver', chrome_options=chrome_options)
     return driver
 
 
@@ -94,7 +75,7 @@ def scrapper(keywords):
     print(url)
     driver.get(url)
     data = driver.page_source
-    print(data)
+    # print(data)
     soup = BS(data,"html.parser")
     divdata = soup.find_all('ul', {"class": "results-base"})
     # print(divdata)
@@ -107,4 +88,4 @@ def scrapper(keywords):
             item['href'] = "https://www.myntra.com/" + href["href"]
         arr.append(item)
     driver.close()
-    return arr
+    return divdata
