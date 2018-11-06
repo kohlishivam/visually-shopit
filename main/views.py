@@ -28,7 +28,7 @@ def handleUpload(request):
         print(keywords_arr)
         keywords = ""
         for i in keywords_arr:
-            keywords = keywords+"-"+i
+            keywords = i+"-"+keywords
         keywords = str(keywords)
         return HttpResponse(scrapper(keywords))
  
@@ -75,16 +75,15 @@ def scrapper(keywords):
     driver.get(url)
     data = driver.page_source
     soup = BS(data,"html.parser")
-    # divdata = soup.find_all('ul', {"class": "results-base"})
-    arr = []
-    divdata = soup.find_all('img')
+    divdata = soup.find_all('ul', {"class": "results-base"})
     print(divdata)
-    # for i in range(9):
-    #     item = {}
-    #     for img in divdata[0].find_all("img"):
-    #         item['img'] = img["src"]
-    #     for href in divdata[0].find_all("a"):
-    #         item['href'] = "https://www.myntra.com/" + href["href"]
-    #     arr.append(item)
-    # driver.close()
+    arr = []
+    for i in range(9):
+        item = {}
+        for img in divdata[0].find_all("img"):
+            item['img'] = img["src"]
+        for href in divdata[0].find_all("a"):
+            item['href'] = "https://www.myntra.com/" + href["href"]
+        arr.append(item)
+    driver.close()
     return divdata
