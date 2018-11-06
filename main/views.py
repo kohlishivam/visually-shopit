@@ -55,7 +55,7 @@ def setup_webdriver():
     prefs = {"profile.default_content_setting_values.notifications" : 2}
     chrome_options.add_experimental_option("prefs",prefs)
     path = os.path.dirname(os.path.abspath('chromedriver'))
-    driver = webdriver.Chrome(executable_path=path+"/main/chromedriver", chrome_options=chrome_options)
+    driver = webdriver.Chrome(executable_path="/main/chromedriver", chrome_options=chrome_options)
     return driver
 
 
