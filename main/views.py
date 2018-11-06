@@ -51,12 +51,6 @@ def test(request):
 # to initialte the driver 
 # chrome driver is used for this selenium
 def setup_webdriver():
-    # prefs = {"profile.default_content_setting_values.notifications" : 2}
-    # chrome_options.add_experimental_option("prefs",prefs)
-    # path = os.path.dirname(os.path.abspath('chromedriver'))
-    # driver = webdriver.Chrome(executable_path="/main/chromedriver", chrome_options=chrome_options)
-    # return driver
-    # chrome_options = Options()
     chrome_exec_shim = "/app/.apt/usr/bin/google-chrome"
     chrome_options = webdriver.ChromeOptions()
     chrome_options.binary_location = chrome_exec_shim
@@ -80,14 +74,15 @@ def scrapper(keywords):
     driver.get(url)
     data = driver.page_source
     soup = BS(data,"html.parser")
-    divdata = soup.find_all('ul', {"class": "results-base"})
+    # divdata = soup.find_all('ul', {"class": "results-base"})
     arr = []
-    for i in range(9):
-        item = {}
-        for img in divdata[0].find_all("img"):
-            item['img'] = img["src"]
-        for href in divdata[0].find_all("a"):
-            item['href'] = "https://www.myntra.com/" + href["href"]
-        arr.append(item)
-    driver.close()
-    return arr
+    divdata = soup.find_all('img')
+    # for i in range(9):
+    #     item = {}
+    #     for img in divdata[0].find_all("img"):
+    #         item['img'] = img["src"]
+    #     for href in divdata[0].find_all("a"):
+    #         item['href'] = "https://www.myntra.com/" + href["href"]
+    #     arr.append(item)
+    # driver.close()
+    return divdata
