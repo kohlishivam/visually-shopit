@@ -85,7 +85,7 @@ def setup_webdriver():
     return driver
 
 
-# scrapper for myntra
+# scrapper for myntra 
 # the results that are returned is the img url and the buy url
 # top 9 results are given
 def scrapper(keywords):
@@ -108,3 +108,4 @@ def scrapper(keywords):
         arr.append(item)
     driver.close()
     return arr
+
