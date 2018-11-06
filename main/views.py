@@ -20,7 +20,7 @@ def handleUpload(request):
         image = request.FILES.get('file')
         image_read = image.read()
         project_id = "essential-haiku-218118"
-        model_id = "ICN8920291248832569420"
+        model_id = "ICN747416880257459356"
         response = get_prediction(image_read, project_id,  model_id)
         keywords_arr = []
         for result in response.payload:
@@ -60,10 +60,10 @@ def setup_webdriver():
     chrome_exec_shim = "/app/.apt/opt/google/chrome/chrome"
     chrome_options = webdriver.ChromeOptions()
     chrome_options.binary_location = chrome_exec_shim
-    # chrome_options.add_argument('--disable-gpu')
-    chrome_options.add_argument('--no-sandbox')
-    chrome_options.add_argument('headless')
-    chrome_options.add_argument('--disable-dev-shm-usage')
+    chrome_options.add_argument('--disable-gpu');
+    chrome_options.add_argument('--no-sandbox');
+    # chrome_options.add_argument('headless');
+    # chrome_options.add_argument('--disable-dev-shm-usage');
     driver = webdriver.Chrome(executable_path=chrome_exec_shim, chrome_options=chrome_options)
     return driver
 
