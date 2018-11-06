@@ -9,7 +9,8 @@ from google.oauth2 import service_account
 from selenium import webdriver
 import time
 import requests
-from bs4 import BeautifulSoup as BS
+from bs4 import BeautifulSoup as 
+import os
 
 
 ## handle the image uploads
@@ -53,7 +54,8 @@ def setup_webdriver():
     chrome_options = webdriver.ChromeOptions()
     prefs = {"profile.default_content_setting_values.notifications" : 2}
     chrome_options.add_experimental_option("prefs",prefs)
-    driver = webdriver.Chrome(executable_path="/app/main/chromedriver", chrome_options=chrome_options)
+    path = os.path.dirname(os.path.abspath('chromedriver'))
+    driver = webdriver.Chrome(executable_path=path+"/main/chromedriver", chrome_options=chrome_options)
     return driver
 
 
