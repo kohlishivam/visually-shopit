@@ -63,7 +63,7 @@ def setup_webdriver():
     chrome_options.add_argument('--disable-gpu');
     chrome_options.add_argument('--no-sandbox');
     # chrome_options.add_argument('headless')
-    driver = webdriver.Chrome(executable_path=chrome_exec_shim, chrome_options=chrome_options)
+    driver = webdriver.Chrome(executable_path='/app/main/chromedriver', chrome_options=chrome_options)
     return driver
 
 
