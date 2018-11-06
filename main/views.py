@@ -53,7 +53,7 @@ def setup_webdriver():
     chrome_options = webdriver.ChromeOptions()
     prefs = {"profile.default_content_setting_values.notifications" : 2}
     chrome_options.add_experimental_option("prefs",prefs)
-    driver = webdriver.Chrome(executable_path="/Users/sk/Desktop/shopit/shopitbackend/main/chromedriver", chrome_options=chrome_options)
+    driver = webdriver.Chrome(executable_path="/app/main/chromedriver", chrome_options=chrome_options)
     return driver
 
 
