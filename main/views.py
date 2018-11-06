@@ -22,6 +22,7 @@ def handleUpload(request):
         project_id = "essential-haiku-218118"
         model_id = "ICN747416880257459356"
         response = get_prediction(image_read, project_id,  model_id)
+        print(response)
         keywords_arr = []
         for result in response.payload:
             keywords_arr.append(result.display_name)
