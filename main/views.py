@@ -75,7 +75,7 @@ def scrapper(keywords):
     print(url)
     driver.get(url)
     data = driver.page_source
-    # print(data)
+    print(data)
     soup = BS(data,"html.parser")
     divdata = soup.find_all('ul', {"class": "results-base"})
     # print(divdata)
