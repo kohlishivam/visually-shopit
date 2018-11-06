@@ -9,7 +9,7 @@ from google.oauth2 import service_account
 from selenium import webdriver
 import time
 import requests
-from bs4 import BeautifulSoup as 
+from bs4 import BeautifulSoup as BS
 import os
 
 
