@@ -57,13 +57,13 @@ def setup_webdriver():
     # driver = webdriver.Chrome(executable_path="/main/chromedriver", chrome_options=chrome_options)
     # return driver
     # chrome_options = Options()
-    chrome_exec_shim = "/app/.apt/opt/google/chrome/chrome"
+    chrome_exec_shim = "/app/main/chromedriver"
     chrome_options = webdriver.ChromeOptions()
     chrome_options.binary_location = chrome_exec_shim
     chrome_options.add_argument('--disable-gpu');
     chrome_options.add_argument('--no-sandbox');
     # chrome_options.add_argument('headless')
-    driver = webdriver.Chrome(executable_path='/main/chromedriver', chrome_options=chrome_options)
+    driver = webdriver.Chrome(executable_path='app/main/chromedriver', chrome_options=chrome_options)
     return driver
 
 
