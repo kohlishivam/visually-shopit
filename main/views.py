@@ -48,7 +48,7 @@ def test(request):
     return render(request,'main/test.html')
 
 
-# to initialte the driver
+# to initialte the driver 
 # chrome driver is used for this selenium
 def setup_webdriver():
     # prefs = {"profile.default_content_setting_values.notifications" : 2}
