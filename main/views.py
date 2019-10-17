@@ -15,7 +15,7 @@ import operator
 import json
 
 
-## handle the image uploads
+# handle the image uploads
 @csrf_exempt
 def handleUpload(request):
     if request.method == 'POST' and request.FILES.get('file'):
