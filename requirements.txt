@@ -1,7 +1,7 @@
-Django==1.8
+Django==2.2.24
 gunicorn==19.6.0
 beautifulsoup4==4.6.3
-Django==1.8
+Django==2.2.24
 google==2.0.1
 google-api-core==1.5.1
 google-auth==1.5.1
